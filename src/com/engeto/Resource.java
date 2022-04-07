@@ -13,7 +13,7 @@ public class Resource {
                 '}';
     }
 
-    public synchronized boolean askAndLockResource(int id){
+    public synchronized boolean askAndLock(int id){
         if(!isInUse){
             this.isInUse = true;
             this.usedById = id;
@@ -22,7 +22,7 @@ public class Resource {
             return false;
     }
 
-    public synchronized void releaseResource(int id){
+    public synchronized void release(int id){
         if(usedById == id){
             this.isInUse = false;
             this.usedById = -1;

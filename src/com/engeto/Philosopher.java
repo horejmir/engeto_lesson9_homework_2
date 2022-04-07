@@ -31,7 +31,7 @@ public class Philosopher implements Runnable {
             countTries++;
             countAllTries.incrementAndGet();
 
-            if (leftResource.askAndLockResource(id) && rightResource.askAndLockResource(id)) {
+            if (leftResource.askAndLock(id) && rightResource.askAndLock(id)) {
 
                 if (leftResource.getUsedById() != id || !leftResource.isInUse() || rightResource.getUsedById() != id || !rightResource.isInUse())
                     throw new RuntimeException("Resources are not allocated properly!!!");
@@ -40,8 +40,8 @@ public class Philosopher implements Runnable {
                 countAllSuccessfulTries.incrementAndGet();
             }
 
-            leftResource.releaseResource(id);
-            rightResource.releaseResource(id);
+            leftResource.release(id);
+            rightResource.release(id);
         }
 
         System.out.println("DONE - Philosopher #" + id + " finished his/her meal! Plate check: " + mealPortion
