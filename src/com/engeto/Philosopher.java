@@ -8,8 +8,8 @@ public class Philosopher implements Runnable {
     private static final AtomicLong countAllSuccessfulTries = new AtomicLong(0);
 
     private final int id;
-    private Resource leftResource;
-    private Resource rightResource;
+    private final Resource leftResource;
+    private final Resource rightResource;
     private int mealPortion;
     private int countTries = 0;
 
