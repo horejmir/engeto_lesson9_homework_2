@@ -18,7 +18,7 @@ public class Main {
         List<Philosopher> philosophers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; i++) {
                 philosophers.add(new Philosopher(i+1, MEAL_PORTIONS, resources.get(i),
-                        (i+1) % NUMBER_OF_PHILOSOPHERS == 0 ? resources.get(0) : resources.get(i+1)));
+                        resources.get((i+1) % NUMBER_OF_PHILOSOPHERS)));
         }
 
 

@@ -33,7 +33,7 @@ public class Philosopher implements Runnable {
 
             if (leftResource.askAndLock(id) && rightResource.askAndLock(id)) {
 
-                if (leftResource.getJobId().equals(id) || rightResource.getJobId().equals(id))
+                if (!leftResource.getJobId().equals(id) || !rightResource.getJobId().equals(id))
                   throw new RuntimeException("Resources are not allocated properly!!!");
 
                 mealPortion--;
