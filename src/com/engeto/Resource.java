@@ -2,38 +2,31 @@ package com.engeto;
 
 public class Resource {
 
-    private boolean isInUse = false;
-    private int usedById = -1;
+    private Integer jobId = null;
 
     @Override
     public String toString() {
         return "Resource{" +
-                "isInUse=" + isInUse +
-                ", usedById=" + usedById +
+                "jobId=" + jobId +
                 '}';
     }
 
-    public synchronized boolean askAndLock(int id){
-        if(!isInUse){
-            this.isInUse = true;
-            this.usedById = id;
+    public synchronized boolean askAndLock(Integer jobId) {
+        if (this.jobId == null) {
+            this.jobId = jobId;
             return true;
         } else
             return false;
     }
 
-    public synchronized void release(int id){
-        if(usedById == id){
-            this.isInUse = false;
-            this.usedById = -1;
-        }
+    public synchronized void release(Integer jobId) {
+        if (this.jobId != null)
+            if (this.jobId.equals(jobId))
+                this.jobId = null;
     }
 
-    public boolean isInUse() {
-        return isInUse;
+    public Integer getJobId() {
+        return jobId;
     }
 
-    public int getUsedById() {
-        return usedById;
-    }
 }

@@ -11,22 +11,19 @@ public class Main {
     public static void main(String[] args) {
 
         List<Resource> resources = new ArrayList<>();
-        for(int i = 0;i < NUMBER_OF_PHILOSOPHERS; i++){
+        for (int i = 0;i < NUMBER_OF_PHILOSOPHERS; i++) {
             resources.add(new Resource());
         }
 
         List<Philosopher> philosophers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; i++) {
-            int j = i + 1;
-            if (j < NUMBER_OF_PHILOSOPHERS)
-                philosophers.add(new Philosopher(i + 1, MEAL_PORTIONS, resources.get(i), resources.get(j)));
-            else
-                philosophers.add(new Philosopher(i + 1, MEAL_PORTIONS, resources.get(i), resources.get(0)));
+                philosophers.add(new Philosopher(i+1, MEAL_PORTIONS, resources.get(i),
+                        (i+1) % NUMBER_OF_PHILOSOPHERS == 0 ? resources.get(0) : resources.get(i+1)));
         }
 
 
         List<Thread> threadList = new ArrayList<>();
-        for(Philosopher philosopher : philosophers){
+        for (Philosopher philosopher : philosophers) {
             Thread thread = new Thread(philosopher);
             threadList.add(thread);
             thread.start();

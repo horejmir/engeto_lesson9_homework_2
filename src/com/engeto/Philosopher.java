@@ -33,8 +33,8 @@ public class Philosopher implements Runnable {
 
             if (leftResource.askAndLock(id) && rightResource.askAndLock(id)) {
 
-                if (leftResource.getUsedById() != id || !leftResource.isInUse() || rightResource.getUsedById() != id || !rightResource.isInUse())
-                    throw new RuntimeException("Resources are not allocated properly!!!");
+                if (leftResource.getJobId().equals(id) || rightResource.getJobId().equals(id))
+                  throw new RuntimeException("Resources are not allocated properly!!!");
 
                 mealPortion--;
                 countAllSuccessfulTries.incrementAndGet();
@@ -49,6 +49,16 @@ public class Philosopher implements Runnable {
                 + (System.currentTimeMillis() - startTime) + " msec, thread: " + Thread.currentThread());
     }
 
+    @Override
+    public String toString() {
+        return "Philosopher{" +
+                "id=" + id +
+                ", leftResource=" + leftResource +
+                ", rightResource=" + rightResource +
+                ", mealPortion=" + mealPortion +
+                ", countTries=" + countTries +
+                '}';
+    }
 
     public static long getAllTries() {
         return countAllTries.longValue();
@@ -57,6 +67,4 @@ public class Philosopher implements Runnable {
     public static long getAllSuccessfulTries() {
         return countAllSuccessfulTries.longValue();
     }
-
-
 }
